@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>SCT-后台系统</title>
+<link href="style/authority/login_css.css" rel="stylesheet" type="text/css" />
+	<script src="js/vue.js"></script>
+	<script src="js/axios.min.js"></script>
+</head>
+<body>
+	<div id="login_center">
+		<div id="login_area">
+			<div id="login_box">
+				<div id="login_form">
+					<form id="submitForm" action="" method="get">
+						<div id="login_tip">
+							<span id="login_err" class="sty_txt2"></span>
+						</div>
+						<div>
+							 Username：<input type="text" class="username" id="name" v-model="username">
+						</div>
+						<div>
+							password：<input type="text" class="password" id="password" v-model="password">
+						</div>
+						<div id="btn_area">
+							<input type="button" class="login_btn" id="login_sub"  value="login" @click="denglu();">
+							<input type="reset" class="login_btn" id="login_ret" value="res" @click="chongzhi();">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+
+<script>
+		var app1=new Vue({
+			el:"#login_center",
+			data:{
+				username:"",
+				password:""
+			},
+			methods:{
+				denglu:function(){
+					if (this.username=="") {
+						alert("请输入账号信息");
+					}else if(this.password==""){
+						alert("请输入密码");
+					} else{
+						axios.get("loginStatus?username="+this.username+"&password="+this.password)
+						  .then((res) => {
+							  // if (res.data)
+							  if (res.data=="error") {
+							  	alert("login error");
+							  } else{
+								// var uid=res.data.id;
+								// var realname=res.data.realname;
+								// window.localStorage.setItem("uid",uid);
+								// window.localStorage.setItem("realname",realname);
+								window.location.href="qianduan/index.html";
+							  }
+						  });
+						  // .catch((error) => {
+							// console.log(error);
+						  // });
+					}
+				},
+				chongzhi:function(){
+					this.username="";
+					this.password="";
+				}
+			},
+			created:function(){
+				
+			},
+			computed:{}
+		});
+	</script>
+
+</body>
+</html>
