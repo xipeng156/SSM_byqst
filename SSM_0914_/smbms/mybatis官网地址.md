@@ -1,1 +1,1 @@
-httpwww.mybatis.cnarchives789.html
+http://www.mybatis.cnarchives789.html

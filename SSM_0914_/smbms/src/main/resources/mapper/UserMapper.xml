@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.dao.UserMapper">
+    <select id="getCount" resultType="int">
+        select count(1) as count from smbms_user
+    </select>
+    <select id="getAll" resultType="user">
+        select * from smbms_user
+    </select>
+    <select id="getOne" parameterType="int" resultType="user">
+        select * from smbms_user where id = #{id}
+    </select>
+    <select id="getUser" parameterType="String" resultType="user">
+        select * from smbms_user where userName like concat('%',#{username},'%')
+    </select>
+
+    <select id="getUserByNameAndRole" parameterType="user" resultType="user">
+        select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
+    </select>
+</mapper>
