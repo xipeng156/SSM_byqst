@@ -18,4 +18,8 @@
     <select id="getUserByNameAndRole" parameterType="user" resultType="user">
         select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
     </select>
+
+    <select id="getUserByNameAndRole_map" parameterType="map" resultType="user">
+        select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
+    </select>
 </mapper>

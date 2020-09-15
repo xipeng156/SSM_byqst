@@ -9,6 +9,7 @@ import sun.misc.Resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -84,6 +85,18 @@ public class Test {
         user.setUserName("张");
         user.setUserRole(3);
         List<User> users = sqlSession.getMapper(UserMapper.class).getUserByNameAndRole(user);
+        for (User user1 : users) {
+            System.out.println(user1);
+        }
+    }
+
+    @org.junit.Test
+    public void getUserByNameAndRole_map(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("userRole",3);
+        map.put("userName","张");
+        List<User> users = sqlSession.getMapper(UserMapper.class).getUserByNameAndRole_map(map);
         for (User user1 : users) {
             System.out.println(user1);
         }

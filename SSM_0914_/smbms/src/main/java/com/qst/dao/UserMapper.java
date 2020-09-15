@@ -2,6 +2,7 @@ package com.qst.dao;
 
 import com.qst.pojo.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -16,4 +17,5 @@ public interface UserMapper {
     public User getOne(int id);
     public List<User> getUser(String username);
     public List<User> getUserByNameAndRole(User user);
+    List<User> getUserByNameAndRole_map(HashMap<String, Object> map);
 }
