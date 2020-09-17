@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE configuration
-        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+<!--文件头-->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!--配置数据源-->
     <properties resource="database.properties"/>
+<!--    设置自动映射-->
+<!--    默认是PARTIAL，只会自动映射没有定义嵌套结果集映射的结果集-->
+<!--    配置FULL，可以映射嵌套结果集的映射-->
+    <settings>
+        <setting name="autoMappingBehavior" value="FULL"/>
+    </settings>
     <typeAliases>
-<!--        指定别名-->
+<!--        为某一类指定别名-->
 <!--        <typeAlias type="com.qst.pojo.User" alias="user"/>-->
+        <!--为包指定别名-->
         <package name="com.qst.pojo"/>
     </typeAliases>
+<!--    配置数据源-->
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"></transactionManager>
@@ -20,9 +29,11 @@
             </dataSource>
         </environment>
     </environments>
+<!--    指定映射的xml文件-->
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/Provider.xml"/>
+        <mapper resource="mapper/BillMapper.xml"/>
 <!--        <mapper resource="mapper/*.xml"/>-->
     </mappers>
 </configuration>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <context:component-scan base-package="com.qst"></context:component-scan>
+    <aop:aspectj-autoproxy/>
+
+<!--<bean id="hello" class="com.qst.pojo.SpringTest">-->
+<!--<property name="hello" value="Spring"/>-->
+<!--</bean>-->
+<!--    <bean id="userDao" class="com.qst.dao.UserDaoImpl"></bean>-->
+<!--    以get方式传入-->
+<!--    <bean class="com.qst.service.UserServiceImpl" id="service">-->
+<!--        <property name="userDao" ref="userDao"/>-->
+<!--    </bean>-->
+<!--    以构造方法传入-->
+<!--    <bean class="com.qst.service.UserServiceImpl" id="service">-->
+<!--        <constructor-arg><ref bean="userDao"/> </constructor-arg>-->
+<!--    </bean>-->
+
+<!--    <bean class="com.qst.logger.UserServiceLogger" id="logger"/>-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pointcut" expression="execution(* com.qst.service..*.*(..))"/>-->
+<!--        <aop:aspect ref="logger">-->
+<!--            &lt;!&ndash;        前置增强&ndash;&gt;-->
+<!--            <aop:before method="before" pointcut-ref="pointcut"/>-->
+<!--&lt;!&ndash;            后置增强&ndash;&gt;-->
+<!--            <aop:after-returning method="after" pointcut-ref="pointcut" returning="result"/>-->
+<!--&lt;!&ndash;            异常增强&ndash;&gt;-->
+<!--            <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut" throwing="exception"></aop:after-throwing>-->
+<!--&lt;!&ndash;            最终增强&ndash;&gt;-->
+<!--            <aop:after-throwing method="afterout" pointcut-ref="pointcut"></aop:after-throwing>-->
+<!--&lt;!&ndash;            环绕增强&ndash;&gt;-->
+<!--            <aop:around method="around" pointcut-ref="pointcut"></aop:around>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+</beans>

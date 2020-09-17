@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Ma'pper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.dao.UserMapper">
+    <resultMap id="useRoleName" type="user">
+        <result property="roleName" column="roleName"></result>
+    </resultMap>
+
+    <resultMap id="userList" type="user">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="userCode" column="userCode"/>
+        <association property="role" javaType="role">
+            <id property="id" column="r_id"/>
+            <result property="roleName" column="r_rolename"/>
+        </association>
+    </resultMap>
+    <select id="getCount" resultType="int">
+        select count(1) as count from smbms_user
+    </select>
+    <select id="getAll" resultType="user">
+        select * from smbms_user
+    </select>
+    <select id="getOne" parameterType="int" resultType="user">
+        select * from smbms_user where id = #{id}
+    </select>
+    <select id="getUser" parameterType="String" resultType="user">
+        select * from smbms_user where userName like concat('%',#{username},'%')
+    </select>
+
+    <select id="getUserByNameAndRole" parameterType="user" resultType="user">
+        select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
+    </select>
+
+    <select id="getUserByNameAndRole_map" parameterType="map" resultType="user">
+        select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
+    </select>
+
+    <select id="getUserByNameAndRoleName" resultMap="useRoleName" parameterType="user">
+        select u.*,r.roleName from smbms_user u,smbms_role r
+        where u.userName like concat('%',#{userName},'%') and
+        r.roleName = #{roleName} and u.userRole = r.id
+    </select>
+
+    <insert id="AddOne" parameterType="user">
+        insert into smbms_user (userCode,userName,userPassword) value (#{userCode},#{userName},#{userPassword})
+    </insert>
+
+    <delete id="DeleteOne" parameterType="String">
+        delete from smbms_user where userName = #{userName}
+    </delete>
+
+    <update id="UpdateOne" parameterType="user">
+        update smbms_user
+        set userName = #{userName},userCode = #{userCode}
+        where id = #{id}
+    </update>
+
+
+    <select id="SelectUserByRoleID" resultMap="userList" parameterType="int">
+        select u.*,r.id as r_id,r.roleName as r_rolename
+        from smbms_user u left join smbms_role r on u.userRole = r.id
+        where r.id = #{id}
+    </select>
+
+
+    <select id="getUserByNameAndRole_if" parameterType="map" resultType="user">
+        select * from smbms_user where 1=1
+        <if test="userRole != null" >
+            and userRole = #{userRole}
+            </if>
+        <if test="userName != null" >
+          and userName like concat('%',#{userName},'%')
+            </if>
+
+    </select>
+
+
+    <select id="getUserByNameAndRole_where" parameterType="map" resultType="user">
+        select * from smbms_user
+        <where>
+            <if test="userRole !=null" >
+                and userRole = #{userRole}
+            </if>
+            <if test="userName !=null" >
+                and userName like concat('%',#{userName},'%')
+            </if>
+        </where>
+    </select>
+
+    <update id="UpdateOneSet" parameterType="user">
+        update smbms_user
+        <set>
+            <if test="userName != null or userName != ''">
+                userName = #{userName},
+            </if>
+            <if test="userCode != null or userCode != ''">
+                userCode = #{userCode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="UpdateByTrim" parameterType="user">
+        update smbms_user set
+        <trim suffixOverrides="," suffix="where id=#{id}">
+            <if test="userName != null or userName != ''">
+                userName = #{userName},
+            </if>
+            <if test="userCode != null or userCode != ''">
+                userCode = #{userCode},
+            </if>
+        </trim>
+    </update>
+<!--找不到方法
+Invalid bound statement (not found):
+com.qst.dao.UserMapper.getUserListarray-->
+    <select id="getUserListarray" resultMap="user">
+        select * from smbms_user where userRole in
+        <foreach collection="array" item="roleArray" open="(" separator="," close=")">
+            #{roleArray}
+        </foreach>
+    </select>
+
+
+<!--    一对多-->
+    <resultMap id="UserToAddress" type="user">
+        <collection property="userArdress" ofType="address">
+            <result property="addressDesc" column="addressDesc"></result>
+        </collection>
+    </resultMap>
+    <select id="getAddressUser" parameterType="user" resultMap="UserToAddress">
+        select a.* from smbms_user u
+        left join smbms_address a
+        on a.userId = u.id
+        where  u.id = #{id};
+    </select>
+</mapper>

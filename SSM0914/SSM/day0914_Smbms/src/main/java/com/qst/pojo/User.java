@@ -12,7 +12,7 @@ public class User {
     //主键
     private Long id;
     //用户名
-    private String UserCode;
+    private String userCode;
 //    姓名
     private String userName;
 //    密码
@@ -35,16 +35,20 @@ public class User {
     private Long modifyBy;
 //    修改时间
     private Date modifyDate;
+//    角色名称
+    private String roleName;
+//  角色
+    private Role role;
 
-    public User(Long id) {
-        this.id = id;
+
+    public User() {
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", UserCode='" + UserCode + '\'' +
+                ", userCode='" + userCode + '\'' +
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", gender=" + gender +
@@ -56,26 +60,9 @@ public class User {
                 ", creationDate=" + creationDate +
                 ", modifyBy=" + modifyBy +
                 ", modifyDate=" + modifyDate +
+                ", roleName='" + roleName + '\'' +
+                ", role=" + role +
                 '}';
-    }
-
-    public User() {
-    }
-
-    public User(Long id, String userCode, String userName, String userPassword, Integer gender, Date birthday, String phone, String address, Integer userRole, Long createBy, Date creationDate, Long modifyBy, Date modifyDate) {
-        this.id = id;
-        UserCode = userCode;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.phone = phone;
-        this.address = address;
-        this.userRole = userRole;
-        this.createBy = createBy;
-        this.creationDate = creationDate;
-        this.modifyBy = modifyBy;
-        this.modifyDate = modifyDate;
     }
 
     public Long getId() {
@@ -87,11 +74,11 @@ public class User {
     }
 
     public String getUserCode() {
-        return UserCode;
+        return userCode;
     }
 
     public void setUserCode(String userCode) {
-        UserCode = userCode;
+        this.userCode = userCode;
     }
 
     public String getUserName() {
@@ -180,5 +167,21 @@ public class User {
 
     public void setModifyDate(Date modifyDate) {
         this.modifyDate = modifyDate;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

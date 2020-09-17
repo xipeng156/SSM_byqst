@@ -18,4 +18,14 @@ public interface UserMapper {
     public List<User> getUser(String username);
     public List<User> getUserByNameAndRole(User user);
     List<User> getUserByNameAndRole_map(HashMap<String, Object> map);
+    List<User> getUserByNameAndRoleName(User user);
+    int AddOne(User user);
+    int DeleteOne(String userName);
+    int UpdateOne(User user);
+    List<User>SelectUserByRoleID(Long id);
+    List<User> getUserByNameAndRole_if(HashMap<String, Object> map);
+    List<User> getUserByNameAndRole_where(HashMap<String, Object> map);
+    int UpdateOneSet(User user);
+    int UpdateByTrim(User user);
+    List<User> getUserListarray(int[] roleArray);
 }
