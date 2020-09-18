@@ -1,6 +1,7 @@
 package com.qst.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author: XiPeng
@@ -39,8 +40,8 @@ public class User {
     private String roleName;
 //  角色
     private Role role;
-
-
+//    地址
+    private List<Address> useraddress;
     public User() {
     }
 
@@ -62,6 +63,7 @@ public class User {
                 ", modifyDate=" + modifyDate +
                 ", roleName='" + roleName + '\'' +
                 ", role=" + role +
+                ", useraddress=" + useraddress +
                 '}';
     }
 
@@ -183,5 +185,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Address> getUseraddress() {
+        return useraddress;
+    }
+
+    public void setUseraddress(List<Address> useraddress) {
+        this.useraddress = useraddress;
     }
 }

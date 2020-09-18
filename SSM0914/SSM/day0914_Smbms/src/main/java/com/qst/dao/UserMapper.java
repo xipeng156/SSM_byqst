@@ -27,5 +27,6 @@ public interface UserMapper {
     List<User> getUserByNameAndRole_where(HashMap<String, Object> map);
     int UpdateOneSet(User user);
     int UpdateByTrim(User user);
-    List<User> getUserListarray(int[] roleArray);
+    List<User> getUserListArray(int[] roleArray);
+    List<User> getAddressUser(User user);
 }

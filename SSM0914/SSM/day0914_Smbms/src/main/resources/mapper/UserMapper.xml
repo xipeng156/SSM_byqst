@@ -2,54 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Ma'pper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qst.dao.UserMapper">
-    <resultMap id="useRoleName" type="user">
-        <result property="roleName" column="roleName"></result>
-    </resultMap>
 
-    <resultMap id="userList" type="user">
-        <id property="id" column="id"/>
-        <result property="userName" column="userName"/>
-        <result property="userCode" column="userCode"/>
-        <association property="role" javaType="role">
-            <id property="id" column="r_id"/>
-            <result property="roleName" column="r_rolename"/>
-        </association>
-    </resultMap>
+
+
+
+<!--    空参，返回值为数组，查询条数-->
     <select id="getCount" resultType="int">
         select count(1) as count from smbms_user
     </select>
+<!--    空参，返回值为实体类，查询全表-->
     <select id="getAll" resultType="user">
         select * from smbms_user
     </select>
+
+
+<!--    int类型入参，实体类出参，查询指定列-->
     <select id="getOne" parameterType="int" resultType="user">
         select * from smbms_user where id = #{id}
     </select>
+
+
+<!--    string类型入参，实体类出参，模糊查询-->
     <select id="getUser" parameterType="String" resultType="user">
         select * from smbms_user where userName like concat('%',#{username},'%')
     </select>
 
+<!--    实体类入参，获取字段，实体类出参，多条件模糊查询-->
     <select id="getUserByNameAndRole" parameterType="user" resultType="user">
         select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
     </select>
 
+<!--    map类型入参，实体类出参，传入map进行多条件模糊查询-->
     <select id="getUserByNameAndRole_map" parameterType="map" resultType="user">
         select * from smbms_user where userRole = #{userRole} and userName like concat('%',#{userName},'%')
     </select>
 
+    <!--    实体类入参，map出参，根据映射关系查询-->
+    <resultMap id="useRoleName" type="user">
+        <result property="roleName" column="roleName"></result>
+    </resultMap>
     <select id="getUserByNameAndRoleName" resultMap="useRoleName" parameterType="user">
         select u.*,r.roleName from smbms_user u,smbms_role r
         where u.userName like concat('%',#{userName},'%') and
         r.roleName = #{roleName} and u.userRole = r.id
     </select>
 
+<!--增（返回值为int）-->
     <insert id="AddOne" parameterType="user">
         insert into smbms_user (userCode,userName,userPassword) value (#{userCode},#{userName},#{userPassword})
     </insert>
-
+<!--删（返回值为int）-->
     <delete id="DeleteOne" parameterType="String">
         delete from smbms_user where userName = #{userName}
     </delete>
-
+<!--改（返回值为int）-->
     <update id="UpdateOne" parameterType="user">
         update smbms_user
         set userName = #{userName},userCode = #{userCode}
@@ -57,13 +63,19 @@
     </update>
 
 
+        <resultMap id="userList" type="user">
+            <id property="id" column="id"/>
+            <association property="role" javaType="role">
+                <result property="roleName" column="r_rolename"/>
+            </association>
+        </resultMap>
     <select id="SelectUserByRoleID" resultMap="userList" parameterType="int">
         select u.*,r.id as r_id,r.roleName as r_rolename
         from smbms_user u left join smbms_role r on u.userRole = r.id
         where r.id = #{id}
     </select>
 
-
+<!--if语句判断-->
     <select id="getUserByNameAndRole_if" parameterType="map" resultType="user">
         select * from smbms_user where 1=1
         <if test="userRole != null" >
@@ -75,7 +87,7 @@
 
     </select>
 
-
+<!--where语句判断-->
     <select id="getUserByNameAndRole_where" parameterType="map" resultType="user">
         select * from smbms_user
         <where>
@@ -87,7 +99,7 @@
             </if>
         </where>
     </select>
-
+<!--修改判断条件-->
     <update id="UpdateOneSet" parameterType="user">
         update smbms_user
         <set>
@@ -100,6 +112,7 @@
         </set>
         where id = #{id}
     </update>
+<!--语句拼接    -->
     <update id="UpdateByTrim" parameterType="user">
         update smbms_user set
         <trim suffixOverrides="," suffix="where id=#{id}">
@@ -111,27 +124,25 @@
             </if>
         </trim>
     </update>
-<!--找不到方法
-Invalid bound statement (not found):
-com.qst.dao.UserMapper.getUserListarray-->
-    <select id="getUserListarray" resultMap="user">
+<!--    入参foreach遍历-->
+    <select id="getUserListArray" resultType="user">
         select * from smbms_user where userRole in
         <foreach collection="array" item="roleArray" open="(" separator="," close=")">
             #{roleArray}
         </foreach>
     </select>
-
-
 <!--    一对多-->
     <resultMap id="UserToAddress" type="user">
-        <collection property="userArdress" ofType="address">
+        <collection property="useraddress" ofType="address">
             <result property="addressDesc" column="addressDesc"></result>
         </collection>
     </resultMap>
+
     <select id="getAddressUser" parameterType="user" resultMap="UserToAddress">
         select a.* from smbms_user u
         left join smbms_address a
         on a.userId = u.id
         where  u.id = #{id};
     </select>
+
 </mapper>

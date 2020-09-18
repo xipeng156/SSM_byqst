@@ -34,6 +34,5 @@
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/Provider.xml"/>
         <mapper resource="mapper/BillMapper.xml"/>
-<!--        <mapper resource="mapper/*.xml"/>-->
     </mappers>
 </configuration>

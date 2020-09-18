@@ -1,8 +1,12 @@
 package com.qst.service;
 
 import com.qst.dao.UserMapper;
+import com.qst.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: XiPeng
@@ -16,5 +20,25 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
     public int count() {
         return userMapper.count();
+    }
+
+    @Override
+    public int deleteOne(int id) {
+        return userMapper.deleteOne(id);
+    }
+
+    @Override
+    public int updateOne(User user) {
+        return userMapper.updateOne(user);
+    }
+
+    @Override
+    public int insert(User user) {
+        return userMapper.insert(user);
+    }
+
+    @Override
+    public List<User> getUserList(Map<String, Object> userMap) {
+        return userMapper.getUserList(userMap);
     }
 }

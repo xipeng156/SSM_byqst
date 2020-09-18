@@ -4,12 +4,17 @@ package com.qst.pojo;
 import java.sql.Date;
 
 public class Bill {
-
+  //主键
   private long id;
+  //账单编号
   private String billCode;
+  //商品名称
   private String productName;
+  //商品描述
   private String productDesc;
+  //商品单位
   private String productUnit;
+  //数量
   private double productCount;
   private double totalPrice;
   private long isPayment;

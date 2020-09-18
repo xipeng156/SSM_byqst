@@ -5,4 +5,126 @@
     <select id="count" resultType="int">
         select count(1) from smbms_user;
     </select>
+    <delete id="deleteOne" parameterType="int">
+        delete from smbms_user where id = #{id}
+    </delete>
+    <update id="updateOne" parameterType="user">
+        update smbms_user
+        <set>
+            <if test="userName != null or userName != ''">
+                userName = #{userName},
+            </if>
+            <if test="userCode != null or userCode != ''">
+                userCode = #{userCode},
+            </if>
+            <if test="userPassword != null or userPassword != ''">
+                userPassword = #{userPassword},
+            </if>
+            <if test="gender != null or gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="birthday != null or birthday != ''">
+                birthday = #{birthday},
+            </if>
+            <if test="phone != null or phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="address != null or address != ''">
+                address = #{address},
+            </if>
+            <if test="userRole != null or userRole != ''">
+                userRole = #{userRole},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <insert id="insert" parameterType="user">
+        insert into smbms_user(
+        <trim suffixOverrides=",">
+            <if test="userName != null or userName != ''">
+                userName,
+            </if>
+            <if test="userCode != null or userCode != ''">
+                userCode,
+            </if>
+            <if test="userPassword != null or userPassword != ''">
+                userPassword,
+            </if>
+            <if test="gender != null or gender != ''">
+                gender,
+            </if>
+            <if test="birthday != null or birthday != ''">
+                birthday,
+            </if>
+            <if test="phone != null or phone != ''">
+                phone,
+            </if>
+            <if test="address != null or address != ''">
+                address,
+            </if>
+            <if test="userRole != null or userRole != ''">
+                userRole,
+            </if>
+        </trim>
+        ) value (
+        <trim suffixOverrides=",">
+            <if test="userName != null or userName != ''">
+                #{userName},
+            </if>
+            <if test="userCode != null or userCode != ''">
+                #{userCode},
+            </if>
+            <if test="userPassword != null or userPassword != ''">
+                #{userPassword},
+            </if>
+            <if test="gender != null or gender != ''">
+                #{gender},
+            </if>
+            <if test="birthday != null or birthday != ''">
+                #{birthday},
+            </if>
+            <if test="phone != null or phone != ''">
+                #{phone},
+            </if>
+            <if test="address != null or address != ''">
+                #{address},
+            </if>
+            <if test="userRole != null or userRole != ''">
+                #{userRole},
+            </if>
+        </trim>
+        )
+    </insert>
+
+
+    <select id="getUserList" resultType="user">
+        select * from smbms_user
+        <where>
+            <if test="userName != null and userName != ''">
+                and userName = #{userName}
+            </if>
+            <if test="userCode != null and userCode != ''">
+                and userCode = #{userCode}
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                and userPassword = #{userPassword}
+            </if>
+            <if test="gender != null and gender != ''">
+                and gender = #{gender}
+            </if>
+            <if test="birthday != null and birthday != ''">
+                and birthday = #{birthday}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="userRole != null and userRole != ''">
+                and userRole = #{userRole}
+            </if>
+        </where>
+    </select>
+
 </mapper>

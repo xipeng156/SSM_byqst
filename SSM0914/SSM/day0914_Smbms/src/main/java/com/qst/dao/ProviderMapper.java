@@ -7,4 +7,5 @@ package com.qst.dao;
  * @Modified by:
  */
 public interface ProviderMapper {
+    public int getCount();
 }

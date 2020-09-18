@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Ma'pper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.dao.RoleMapper">
+    <select id="select" parameterType="map" resultType="role">
+        select * from smbms_role
+        <where>
+            <if test="roleCode != null and roleCode != ''">
+                and roleCode = #{roleCode}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and roleName = #{roleName}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="role">
+        insert into smbms_role(
+        <trim suffixOverrides=",">
+            <if test="roleCode != null and roleCode != ''">
+                roleCode,
+            </if>
+            <if test="roleName != null and roleName != ''">
+                roleName,
+            </if>
+        </trim>
+        ) value (
+        <trim suffixOverrides=",">
+            <if test="roleCode != null and roleCode != ''">
+                #{roleCode},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                #{roleName},
+            </if>
+        </trim>
+        )
+    </insert>
+    <update id="update" parameterType="role">
+        update smbms_role
+        <set>
+            <if test="roleCode != null and roleCode != ''">
+                 roleCode = #{roleCode},
+            </if>
+            <if test="roleName != null and roleName != ''">
+                 roleName = #{roleName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from smbms_role where id = #{id}
+    </delete>
+</mapper>

@@ -1,6 +1,10 @@
 package com.qst.dao;
 
+import com.qst.pojo.User;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: XiPeng
@@ -9,5 +13,9 @@ import org.springframework.stereotype.Repository;
  * @Modified by:
  */
 public interface UserMapper {
-    public int count();
+    int count();
+    int deleteOne(int id);
+    int updateOne(User user);
+    int insert(User user);
+    List<User> getUserList(Map<String,Object> userMap);
 }

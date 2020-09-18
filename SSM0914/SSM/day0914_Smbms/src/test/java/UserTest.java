@@ -145,6 +145,7 @@ public class UserTest {
     @Test
     public void SelectUserByRoleID(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
+
         List<User> users = sqlSession.getMapper(UserMapper.class).SelectUserByRoleID(1l);
         for (User user : users) {
             System.out.println(user.toString());
@@ -204,11 +205,27 @@ public class UserTest {
     public void getUserList_array(){
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         int[] roleArray={1,2,3};
-        List<User> userList_array = sqlSession.getMapper(UserMapper.class).getUserListarray(roleArray);
+        List<User> userList_array = sqlSession.getMapper(UserMapper.class).getUserListArray(roleArray);
         for (User user : userList_array) {
             System.out.println(user.toString());
         }
     }
+
+    @Test
+    public void getAddressUser(){
+        SqlSession sqlSession = MyBatisUtils.getSqlSession();
+        User user = new User();
+        user.setId(1l);
+        List<User> list = sqlSession.getMapper(UserMapper.class).getAddressUser(user);
+        for (int i = 0; i < list.size(); i++) {
+//            for (int j = 0; j < list.get(i).getAddress().length(); j++) {
+//                System.out.println(list.get(i).getUseraddress().get(j).getAddressDesc());
+//            }
+            System.out.println(list.get(i).toString());
+        }
+    }
+
+
 
 
 }
