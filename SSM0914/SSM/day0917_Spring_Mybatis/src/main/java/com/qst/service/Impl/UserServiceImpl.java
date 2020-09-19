@@ -1,7 +1,8 @@
-package com.qst.service;
+package com.qst.service.Impl;
 
 import com.qst.dao.UserMapper;
 import com.qst.pojo.User;
+import com.qst.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Ma'pper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.dao.BillMapper">
+    <insert id="insert" parameterType="bill">
+        insert into smbms_bill (
+            <trim suffixOverrides=",">
+                <if test="billCode != null and billCode != ''">
+                    billCode,
+                </if>
+                <if test="productName != null and productName != ''">
+                    productName,
+                </if>
+                <if test="productDesc != null and productDesc != ''">
+                    productDesc,
+                </if>
+                <if test="productUnit != null and productUnit != ''">
+                    productUnit,
+                </if>
+                <if test="productCount != null and productCount != ''">
+                    productCount,
+                </if>
+                <if test="totalPrice != null and totalPrice != ''">
+                    totalPrice,
+                </if>
+                <if test="isPayment != null and isPayment != ''">
+                    isPayment,
+                </if>
+                <if test="providerId != null and providerId != ''">
+                    providerId,
+                </if>
+            </trim>
+        ) values (
+        <trim suffixOverrides=",">
+            <if test="billCode != null and billCode != ''">
+                #{billCode},
+            </if>
+            <if test="productName != null and productName != ''">
+                #{productName},
+            </if>
+            <if test="productDesc != null and productDesc != ''">
+                #{productDesc},
+            </if>
+            <if test="productUnit != null and productUnit != ''">
+                #{productUnit},
+            </if>
+            <if test="productCount != null and productCount != ''">
+                #{productCount},
+            </if>
+            <if test="totalPrice != null and totalPrice != ''">
+                #{totalPrice},
+            </if>
+            <if test="isPayment != null and isPayment != ''">
+                #{isPayment},
+            </if>
+            <if test="providerId != null and providerId != ''">
+                #{providerId},
+            </if>
+        </trim>
+        );
+    </insert>
+
+    <update id="update" parameterType="bill">
+        update smbms_bill
+         <set>
+             <if test="billCode != null and billCode != ''">
+                 billCode = #{billCode},
+             </if>
+             <if test="productName != null and productName != ''">
+                 productName = #{productName},
+             </if>
+             <if test="productDesc != null and productDesc != ''">
+                 productDesc = #{productDesc},
+             </if>
+             <if test="productUnit != null and productUnit != ''">
+                 productUnit = #{productUnit},
+             </if>
+             <if test="productCount != null and productCount != ''">
+                 productCount = #{productCount},
+             </if>
+             <if test="totalPrice != null and totalPrice != ''">
+                 totalPrice = #{totalPrice},
+             </if>
+             <if test="isPayment != null and isPayment != ''">
+                 isPayment = #{isPayment},
+             </if>
+             <if test="providerId != null and providerId != ''">
+                 providerId = #{providerId},
+             </if>
+         </set>
+          where id = #{id};
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from smbms_bill where id = #{id}
+    </delete>
+
+    <select id="select" parameterType="map" resultType="bill">
+        select * from smbms_bill
+        <where>
+            <if test="billCode != null and billCode != ''">
+                billCode = #{billCode}
+            </if>
+            <if test="productName != null and productName != ''">
+                productName = #{productName}
+            </if>
+            <if test="productDesc != null and productDesc != ''">
+                productDesc = #{productDesc}
+            </if>
+            <if test="productUnit != null and productUnit != ''">
+                productUnit = #{productUnit}
+            </if>
+            <if test="productCount != null and productCount != ''">
+                productCount = #{productCount}
+            </if>
+            <if test="totalPrice != null and totalPrice != ''">
+                totalPrice = #{totalPrice}
+            </if>
+            <if test="isPayment != null and isPayment != ''">
+                isPayment = #{isPayment}
+            </if>
+            <if test="providerId != null and providerId != ''">
+                providerId = #{providerId}
+            </if>
+        </where>
+    </select>
+</mapper>

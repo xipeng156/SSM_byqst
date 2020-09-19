@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Ma'pper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.dao.AddressMapper">
+
+    <insert id="insert" parameterType="address">
+        insert into smbms_address(
+            <trim suffixOverrides=",">
+                <if test="contact != null and contact != ''">
+                    contact,
+                </if>
+                <if test="addressDesc != null and addressDesc != ''">
+                    addressDesc,
+                </if>
+                <if test="postCode != null and postCode != ''">
+                    postCode,
+                </if>
+                <if test="tel != null and tel != ''">
+                    tel,
+                </if>
+                <if test="userId != null and userId != ''">
+                    userId,
+                </if>
+            </trim>
+        ) value (
+        <trim suffixOverrides=",">
+            <if test="contact != null and contact != ''">
+                #{contact},
+            </if>
+            <if test="addressDesc != null and addressDesc != ''">
+                #{addressDesc},
+            </if>
+            <if test="postCode != null and postCode != ''">
+                #{postCode},
+            </if>
+            <if test="tel != null and tel != ''">
+                #{tel},
+            </if>
+            <if test="userId != null and userId != ''">
+                #{userId},
+            </if>
+        </trim>
+        )
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from smbms_address where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="address">
+        update smbms_address
+        <set>
+            <if test="contact != null and contact != ''">
+                contact = #{contact},
+            </if>
+            <if test="addressDesc != null and addressDesc != ''">
+                addressDesc = #{addressDesc},
+            </if>
+            <if test="postCode != null and postCode != ''">
+                postCode=#{postCode},
+            </if>
+            <if test="tel != null and tel != ''">
+                tel = #{tel},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="select" parameterType="map" resultType="address">
+        select * from smbms_address
+        <where>
+            <if test="contact != null and contact != ''">
+                and contact = #{contact}
+            </if>
+            <if test="addressDesc != null and addressDesc != ''">
+                and addressDesc = #{addressDesc}
+            </if>
+            <if test="postCode != null and postCode != ''">
+                and postCode=#{postCode}
+            </if>
+            <if test="tel != null and tel != ''">
+                and tel = #{tel}
+            </if>
+            <if test="userId != null and userId != ''">
+                and userId = #{userId}
+            </if>
+        </where>
+    </select>
+
+
+</mapper>

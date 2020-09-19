@@ -1,6 +1,5 @@
 import com.qst.pojo.Role;
 import com.qst.service.RoleService;
-import com.qst.service.RoleServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,16 +14,16 @@ import java.util.List;
  * @Modified by:
  */
 public class RoleTest {
-    @Test
-    public void insert(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("SpringContext.xml");
-        RoleServiceImpl service = context.getBean(RoleServiceImpl.class);
-        Role role = new Role();
-        role.setRoleCode("SMBMS_USER");
-        role.setRoleName("用户");
-        int insert = service.insert(role);
-        System.out.println(insert);
-    }
+//    @Test
+//    public void insert(){
+//        ApplicationContext context = new ClassPathXmlApplicationContext("SpringContext.xml");
+//        RoleServiceImpl service = context.getBean(RoleServiceImpl.class);
+//        Role role = new Role();
+//        role.setRoleCode("SMBMS_USER");
+//        role.setRoleName("用户");
+//        int insert = service.insert(role);
+//        System.out.println(insert);
+//    }
 
     @Test
     public void insert2(){

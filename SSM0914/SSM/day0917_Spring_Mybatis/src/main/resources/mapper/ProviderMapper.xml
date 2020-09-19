@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Ma'pper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qst.dao.ProviderMapper">
+<insert id="insert" parameterType="provider">
+    insert into smbms_provider (
+        <trim suffixOverrides=",">
+            <if test="proCode != null and proCode != ''">
+                proCode,
+            </if>
+            <if test="proName != null and proName != ''">
+                proName,
+            </if>
+            <if test="proDesc != null and proDesc != ''">
+                proDesc,
+            </if>
+            <if test="proContact != null and proContact != ''">
+                proContact,
+            </if>
+            <if test="proPhone != null and proPhone != ''">
+                proPhone,
+            </if>
+            <if test="proAddress != null and proAddress != ''">
+                proAddress,
+            </if>
+            <if test="proFax != null and proFax != ''">
+                proFax,
+            </if>
+        </trim>
+    ) values (
+    <trim suffixOverrides=",">
+        <if test="proCode != null and proCode != ''">
+            #{proCode},
+        </if>
+        <if test="proName != null and proName != ''">
+            #{proName},
+        </if>
+        <if test="proDesc != null and proDesc != ''">
+            #{proDesc},
+        </if>
+        <if test="proContact != null and proContact != ''">
+            #{proContact},
+        </if>
+        <if test="proPhone != null and proPhone != ''">
+            #{proPhone},
+        </if>
+        <if test="proAddress != null and proAddress != ''">
+            #{proAddress},
+        </if>
+        <if test="proFax != null and proFax != ''">
+            #{proFax},
+        </if>
+    </trim>
+    );
+</insert>
+    <update id="update" parameterType="provider">
+        update smbms_provider
+        <set>
+            <if test="proCode != null and proCode != ''">
+                proCode = #{proCode},
+            </if>
+            <if test="proName != null and proName != ''">
+                proName = #{proName},
+            </if>
+            <if test="proDesc != null and proDesc != ''">
+                proDesc = #{proDesc},
+            </if>
+            <if test="proContact != null and proContact != ''">
+                proContact = #{proContact},
+            </if>
+            <if test="proPhone != null and proPhone != ''">
+                proPhone = #{proPhone},
+            </if>
+            <if test="proAddress != null and proAddress != ''">
+                proAddress = #{proAddress},
+            </if>
+            <if test="proFax != null and proFax != ''">
+                proFax = #{proFax},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from smbms_provider where id = #{id}
+    </delete>
+    <select id="select" parameterType="map" resultType="provider">
+        select * from smbms_provider
+        <where>
+            <if test="proCode != null and proCode != ''">
+                and proCode = #{proCode}
+            </if>
+            <if test="proName != null and proName != ''">
+                and proName = #{proName}
+            </if>
+            <if test="proDesc != null and proDesc != ''">
+                and proDesc = #{proDesc}
+            </if>
+            <if test="proContact != null and proContact != ''">
+                and proContact = #{proContact}
+            </if>
+            <if test="proPhone != null and proPhone != ''">
+                and proPhone = #{proPhone}
+            </if>
+            <if test="proAddress != null and proAddress != ''">
+                and proAddress = #{proAddress}
+            </if>
+            <if test="proFax != null and proFax != ''">
+                and proFax = #{proFax}
+            </if>
+        </where>
+    </select>
+</mapper>

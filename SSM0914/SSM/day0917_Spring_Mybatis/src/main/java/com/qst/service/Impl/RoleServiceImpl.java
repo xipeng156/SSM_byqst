@@ -1,7 +1,8 @@
-package com.qst.service;
+package com.qst.service.Impl;
 
 import com.qst.dao.RoleMapper;
 import com.qst.pojo.Role;
+import com.qst.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.Map;
  * @Modified by:
  */
 @Service("roleSerivce")
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleMapper roleMapper;
     @Override
